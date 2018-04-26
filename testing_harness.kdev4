@@ -1,3 +1,4 @@
 [Project]
-Name=testing_harness
+CreatedFrom=CMakeLists.txt
 Manager=KDevCMakeManager
+Name=testing_harness
