@@ -12,14 +12,10 @@ addons:
 before_install:
   - pip install --user cpp-coveralls
 
-before_script:
-  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
-  - mkdir build
-  - cd build
-  - cmake .. -DCOVERAGE=1
-script: 
-  - make
-  - .././test/testBin/test_main
+script:
+  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake . -DCOVERAGE=1
+  - cmake --build . -- -j2
+  - ./test/testBin/test_main
 
 after_success:
-  - coveralls --root ../../ -E ".*gtest.*" -E ".*CMakeFiles.*"
+  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
