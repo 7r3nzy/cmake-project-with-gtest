@@ -14,6 +14,11 @@ add_executable(test_main ${TEST_SRCS} test_main.cpp)
 
 target_link_libraries(test_main ${testingharness_LIBRARIES} gtest Threads::Threads)
 
+if (COVERAGE)
+    target_compile_options(test_main PRIVATE --coverage)
+    target_link_libraries(test_main PRIVATE --coverage)
+endif()
+
 set_target_properties(test_main PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/testBin)
 
