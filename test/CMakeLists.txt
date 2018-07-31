@@ -12,8 +12,8 @@ file(GLOB TEST_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 add_executable(test_main ${TEST_SRCS} test_main.cpp)
 
-target_link_libraries(test_main ${testingharness_LIBRARIES} gtest Threads::Threads)
-
+target_link_libraries(test_main PRIVATE ${testingharness_LIBRARIES} gtest ${CMAKE_THREAD_LIBS_INIT})
+target_compile_options(test_main PRIVATE -std=c++17 -g -Wall -Werror -Wextra -Wpedantic -Wconversion -Wswitch-default -Wswitch-enum -Wunreachable-code -Wwrite-strings -Wcast-align -Wshadow -Wundef)
 if (COVERAGE)
     target_compile_options(test_main PRIVATE --coverage)
     target_link_libraries(test_main PRIVATE --coverage)
