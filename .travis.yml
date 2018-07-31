@@ -8,10 +8,18 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-8
+      
+before_install:
+  - pip install --user cpp-coveralls
 
 before_script:
   - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
   - mkdir build
   - cd build
-  - cmake ..
-script: make
+  - cmake .. -DCOVERAGE=1
+script: 
+  - make
+  - ./test/testBin/test_main
+
+after_success:
+  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
