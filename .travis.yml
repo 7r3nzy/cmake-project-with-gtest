@@ -19,7 +19,7 @@ before_script:
   - cmake .. -DCOVERAGE=1
 script: 
   - make
-  - ./test/testBin/test_main
+  - .././test/testBin/test_main
 
 after_success:
   - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
