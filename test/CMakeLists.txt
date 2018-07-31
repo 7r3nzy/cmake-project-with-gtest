@@ -1,7 +1,7 @@
 #Setup CMake to run tests
 enable_testing()
 
-find_package(GTest REQUIRED)
+include(${PROJECT_SOURCE_DIR}/cmake/gtest.cmake)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 find_package(Threads REQUIRED)
@@ -12,7 +12,7 @@ file(GLOB TEST_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 add_executable(test_main ${TEST_SRCS} test_main.cpp)
 
-target_link_libraries(test_main ${testingharness_LIBRARIES} ${GTEST_LIBRARIES} Threads::Threads)
+target_link_libraries(test_main ${testingharness_LIBRARIES} gtest Threads::Threads)
 
 set_target_properties(test_main PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/testBin)
